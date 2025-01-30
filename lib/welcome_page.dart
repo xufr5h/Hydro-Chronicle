@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hydro_chronicle/components/welcome_row.dart';
 import 'package:hydro_chronicle/home_page.dart';
+import 'package:hydro_chronicle/sign_in.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
@@ -72,7 +73,7 @@ class WelcomePage extends StatelessWidget {
                         'Create widgets and view your tasks more easily.',
                     imagePath: 'assets/images/createWidgets.png'),
                 // whole button
-                const SizedBox(height: 100),
+                const SizedBox(height: 20),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Padding(
@@ -94,7 +95,7 @@ class WelcomePage extends StatelessWidget {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const HomePage()));
+                                      builder: (context) => const SignIn()));
                             },
                             style: ElevatedButton.styleFrom(
                               minimumSize: const Size(200, 60),

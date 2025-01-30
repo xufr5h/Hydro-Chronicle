@@ -63,6 +63,7 @@ flutter:
     - assets/images/taskReminder.png
     - assets/images/createWidgets.png
     - assets/images/furContinue.png
+    - assets/images/menu.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 
