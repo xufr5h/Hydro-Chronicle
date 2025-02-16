@@ -50,6 +50,7 @@ class _SignInState extends State<SignIn> {
                       fontSize: 46,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Itim',
+                      color: Color.fromARGB(255, 63, 62, 62),
                     ),
                   ),
                 ),
@@ -57,11 +58,13 @@ class _SignInState extends State<SignIn> {
                 Textfield(
                   controller: _emailController,
                   label: 'Email',
+                  obscureText: false,
                 ),
                 const SizedBox(height: 20),
                 Textfield(
                   controller: _passwordController,
                   label: 'Password',
+                  obscureText: true,
                 ),
                 const SizedBox(height: 20),
                 Column(
@@ -69,7 +72,7 @@ class _SignInState extends State<SignIn> {
                     Row(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 42),
+                          padding: const EdgeInsets.only(left: 35),
                           child: Checkbox(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(5),
@@ -85,28 +88,30 @@ class _SignInState extends State<SignIn> {
                         ),
                         const Text(
                           'Remember me',
-                          style: TextStyle(fontSize: 18, fontFamily: 'Itim'),
-                        ),
-                      ],
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const SignUp()));
-                      },
-                      child: const Padding(
-                        padding: EdgeInsets.only(left: 140),
-                        child: Text(
-                          'Forgot Password?',
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 16,
                             fontFamily: 'Itim',
-                            color: Color.fromARGB(255, 44, 72, 209),
+                            color: Color.fromARGB(255, 63, 62, 62),
                           ),
                         ),
-                      ),
+                        const SizedBox(width: 30),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const SignUp()));
+                          },
+                          child: const Text(
+                            'Forgot Password?',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: 'Itim',
+                              color: Color.fromARGB(255, 44, 72, 209),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -140,8 +145,9 @@ class _SignInState extends State<SignIn> {
                     const Text(
                       'Don\'t have an account?',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 16,
                         fontFamily: 'Itim',
+                        color: Color.fromARGB(255, 63, 62, 62),
                       ),
                     ),
                     GestureDetector(
@@ -154,7 +160,7 @@ class _SignInState extends State<SignIn> {
                       child: const Text(
                         ' Sign Up',
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 16,
                           fontFamily: 'Itim',
                           color: Color.fromARGB(255, 44, 72, 209),
                         ),

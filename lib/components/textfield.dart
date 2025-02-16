@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class Textfield extends StatelessWidget {
   final TextEditingController controller;
   final String label;
+  final bool obscureText;
 
   const Textfield({
     super.key,
     required this.controller,
     required this.label,
+    required this.obscureText,
   });
 
   @override
@@ -20,8 +22,9 @@ class Textfield extends StatelessWidget {
           child: Text(
             label,
             style: const TextStyle(
-              fontSize: 24,
+              fontSize: 18,
               fontFamily: 'Itim',
+              color: Color.fromARGB(255, 63, 62, 62),
             ),
           ),
         ),
