@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "21896553457",
+    "project_id": "hydrochronicle-6f15f",
+    "storage_bucket": "hydrochronicle-6f15f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:21896553457:android:2c4ddf0898a5c56b9f9a50",
+        "android_client_info": {
+          "package_name": "com.example.hydro_chronicle"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqbrXKwTX3NCsNH3MxlJUzmIIi8GUBJ8c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

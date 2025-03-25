@@ -50,8 +50,8 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.all(20),
                 child: Image.asset(
                   'assets/images/menu.png',
-                  height: 40,
-                  width: 40,
+                  height: 30,
+                  width: 30,
                 ),
               ),
             ],
