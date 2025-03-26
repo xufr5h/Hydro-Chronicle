@@ -9,7 +9,7 @@ class Textfield extends StatelessWidget {
     super.key,
     required this.controller,
     required this.label,
-    required this.obscureText,
+    this.obscureText = false,
   });
 
   @override
@@ -46,6 +46,7 @@ class Textfield extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               child: TextField(
                 controller: controller,
+                obscureText: obscureText,
                 decoration: const InputDecoration(
                   border: InputBorder.none,
                   filled: true,

@@ -1,3 +1,4 @@
 {
-  "cmake.sourceDirectory": "D:/IIMS College/HydroChronicle/hydro_chronicle/linux"
+  "cmake.sourceDirectory": "D:/IIMS College/HydroChronicle/hydro_chronicle/linux",
+  "java.configuration.updateBuildConfiguration": "interactive"
 }
