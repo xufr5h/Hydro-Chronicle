@@ -18,27 +18,34 @@ class _SignInState extends State<SignIn> {
   firebase_auth.FirebaseAuth auth = firebase_auth.FirebaseAuth.instance;
   bool checkBoxValue = false;
   bool circular = false;
+  String? errorMessage;
 
   Future<void> signIn() async {
-    if (!checkBoxValue) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('You must agree to the terms and conditions'),
-        ),
-      );
-      return;
-    }
-    if (_passwordController.text.isEmpty || _emailController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please fill all the fields'),
-        ),
-      );
-      return;
-    }
+    setState(() {
+      errorMessage = null;
+    });
     setState(() {
       circular = true;
     });
+    if (_emailController.text.isEmpty && _passwordController.text.isEmpty) {
+      setState(() {
+        errorMessage = "Please enter your email and password!";
+      });
+      return;
+    }
+    if (_emailController.text.isEmpty) {
+      setState(() {
+        errorMessage = "Please enter your email!";
+      });
+      return;
+    }
+    if (_passwordController.text.isEmpty) {
+      setState(() {
+        errorMessage = "Please enter your password!";
+      });
+      return;
+    }
+
     try {
       firebase_auth.UserCredential userCredential =
           await auth.signInWithEmailAndPassword(
@@ -49,9 +56,25 @@ class _SignInState extends State<SignIn> {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => const HomePage()));
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Error: ${e.toString()}")),
-      );
+      String errorText = e.toString();
+      if (e is firebase_auth.FirebaseAuthException) {
+        switch (e.code) {
+          case 'user-not-found':
+            errorText = "User not found!";
+            break;
+          case 'wrong-password':
+            errorText = "Wrong password!";
+            break;
+          case 'invalid-email':
+            errorText = "Invalid email!";
+            break;
+          default:
+            errorText = "An unknown error occurred!";
+        }
+      }
+      setState(() {
+        errorMessage = errorText;
+      });
     }
     setState(() {
       circular = false;
@@ -162,6 +185,22 @@ class _SignInState extends State<SignIn> {
                         ),
                       ],
                     ),
+                    // error handling
+                    if (errorMessage != null)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
+                        child: Text(
+                          errorMessage!,
+                          style: const TextStyle(
+                            color: Colors.red,
+                            fontSize: 16,
+                            fontFamily: 'Itim',
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    // button
                     const SizedBox(height: 50),
                     ElevatedButton(
                       onPressed: signIn,
