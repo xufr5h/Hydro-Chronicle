@@ -21,22 +21,22 @@ class _SignUpState extends State<SignUp> {
   firebase_auth.FirebaseAuth auth = firebase_auth.FirebaseAuth.instance;
   bool checkBoxValue = false;
   bool circular = false;
+  String? errorMessage;
 
   Future<void> register() async {
+    setState(() {
+      errorMessage = null;
+    });
     if (!checkBoxValue) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('You must agree to the terms and conditions'),
-        ),
-      );
+      setState(() {
+        errorMessage = 'Please agree to the terms and conditions';
+      });
       return;
     }
     if (_passwordController.text != _confirmPasswordController.text) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Passwords do not match'),
-        ),
-      );
+      setState(() {
+        errorMessage = 'Passwords do not match';
+      });
       return;
     }
     setState(() {
@@ -54,9 +54,27 @@ class _SignUpState extends State<SignUp> {
       );
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const SignIn()));
+      // error handling
     } catch (e) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Error: ${e.toString()}")));
+      String errorText = "Error during sign up: ${e.toString()}";
+      if (e is firebase_auth.FirebaseAuthException) {
+        switch (e.code) {
+          case 'email-already-in-use':
+            errorText = 'Email already in use. Please use a different email.';
+            break;
+          case 'invalid-email':
+            errorText = 'Invalid email address. Please enter a valid email.';
+            break;
+          case 'weak-password':
+            errorText = 'Weak password. Please enter a stronger password.';
+            break;
+          default:
+            errorText = "Error : ${e.message}";
+        }
+      }
+      setState(() {
+        errorMessage = errorText;
+      });
     }
     setState(() {
       circular = false;
@@ -172,6 +190,22 @@ class _SignUpState extends State<SignUp> {
                           ),
                         ],
                       ),
+                      // error message display
+                      if (errorMessage != null)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 10),
+                          child: Text(
+                            errorMessage!,
+                            style: const TextStyle(
+                              color: Colors.red,
+                              fontSize: 16,
+                              fontFamily: 'Itim',
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      // button
                       const SizedBox(height: 20),
                       ElevatedButton(
                         onPressed: register,
